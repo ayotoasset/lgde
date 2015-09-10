@@ -3,12 +3,14 @@ Type: Package
 Title: Implements the Locally Gaussian Density Estimator
 Version: 0.0.1.9000
 Date: 2015-09-10
-Authors@R: person("Håkon", "Otneim", email = "haakon.otneim@@gmail.com",
-    role = c("aut", "cre"))
+Authors@R: person("Håkon", "Otneim", email = "haakon.otneim@gmail.com",
+                  role = c("aut", "cre"))
 Description: Contains functions for implementing the LGDE for multivariate and
     conditional density estimation.
+Depends: R (>= 3.1.0)
 License: GPL
 URL: https://github.com/hotneim/lgde
 BugReports: https://github.com/hotneim/lgde/issues
+LazyData: true
 Imports:
     logspline
