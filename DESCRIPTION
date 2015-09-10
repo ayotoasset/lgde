@@ -1,11 +1,12 @@
 Package: lgde
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: Implements the Locally Gaussian Density Estimator
+Version: 0.0.1.9000
 Date: 2015-09-10
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Håkon Otneim
+Maintainer: Håkon Otneim <haakon.otneim@gmail.com>
+Description: Contains functions for implementing the LGDE for multivariate and
+  conditional density estimation.
+License: GPL
 URL: https://github.com/hotneim/lgde
 BugReports: https://github.com/hotneim/lgde/issues
