@@ -64,7 +64,7 @@ biLocal = function(data,
                             tol = .Machine$double.eps^0.25/10^4),
                    silent=TRUE) 
         if(class(opt)!="try-error") {
-            return(c(opt$maximum, dmvnorm(c(x0, y0), mean = c(0,0), sigma = matrix(c(1, opt$maximum, opt$maximum, 1), 2))))
+            return(c(opt$maximum, mvtnorm::dmvnorm(c(x0, y0), mean = c(0,0), sigma = matrix(c(1, opt$maximum, opt$maximum, 1), 2))))
         } else {
             return(c(NA, NA))
         }

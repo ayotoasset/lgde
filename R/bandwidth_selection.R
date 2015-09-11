@@ -11,7 +11,7 @@
 #' @param data The data matrix, one row per observation.
 #' @return A matrix. The first two columns contain each variable pair,
 #' the last two columns contain the two bandwidths for the pair
-#' in question.
+#' in question. Suitable for multiLocal-function.
 #' @examples
 #' data <- cbind(rnorm(100), rnorm(100))
 #' HLocal(data)

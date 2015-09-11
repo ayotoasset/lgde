@@ -1,0 +1,21 @@
+FILE STRUCTURE FOR lgde-PACKAGE:
+
+FILE                       | CONTAINS FUNCTIONS      | INPUT                         | OUTPUT
+---------------------------+-------------------------+-------------------------------+--------------------------
+bandwidth_selection.R      | HLocal                  | data                          | joint.bandwidths
+---------------------------+-------------------------+-------------------------------+--------------------------
+bivariate_estimation.R     | biLocal                 | data                          | $data
+                           |                         | grid                          | $grid
+	                   |                         | h                             | $par.est
+	                   |                         |                               | $f.est
+---------------------------+-------------------------+-------------------------------+--------------------------
+multivariate_estimation.R  | multiLocal              | data                          | $loc.cor
+                           |                         | bandwidths                    | $f.est
+			   |                         | gsize                         | $h
+			   |                         | grid                          | $dimension
+			   |                         |                               | $pairs
+			   |                         |                               | $grid
+---------------------------+-------------------------+-------------------------------+--------------------------
+transLocal.R               | transLocal              | data                          | $transformed.data
+                           |                         | grid                          | $transformed.grid
+	                   |                         | return.normalizing.constants  | $normalizing.constants
