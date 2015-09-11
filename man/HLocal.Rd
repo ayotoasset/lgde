@@ -12,7 +12,7 @@ HLocal(data)
 \value{
 A matrix. The first two columns contain each variable pair,
 the last two columns contain the two bandwidths for the pair
-in question.
+in question. Suitable for multiLocal-function.
 }
 \description{
 Calculate the global cross-validated bandwidths for the LGDE.

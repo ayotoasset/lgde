@@ -55,7 +55,7 @@ transLocal <- function(data,
     if(return.normalizing.constants) {
         calculate.normalizing.constants <- function(i) {
             logspline::dlogspline(grid[,i], marginal.estimates[[i]])/
-                dnorm(qnorm(plogspline(grid[,i], marginal.estimates[[i]])))
+                dnorm(qnorm(logspline::plogspline(grid[,i], marginal.estimates[[i]])))
         }
         normalizing.constants <- matrix(unlist(lapply(X = as.list(1:d),
                                                       FUN = calculate.normalizing.constants)),

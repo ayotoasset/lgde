@@ -33,8 +33,8 @@ multiLocal <- function(data,
     n <- dim(data)[1]
     d <- dim(data)[2]
 
-    # Chech that the dimensions agree
-    if(d != dim(grid)[2]) stop(Grid and data dimensions do not match!)
+    # Check that the dimensions agree
+    if(d != dim(grid)[2]) stop("Grid and data dimensions do not match!")
 
     # Transform the data and grid to standard normality
     transformed <- transLocal(data = data,

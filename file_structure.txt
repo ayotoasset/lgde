@@ -8,6 +8,11 @@ bivariate_estimation.R     | biLocal                 | data                     
                            |                         | grid                          | $grid
 	                   |                         | h                             | $par.est
 	                   |                         |                               | $f.est
+			   |.........................|...............................|..........................
+			   | biLocal.knn             | data                          | $data
+                           |                         | grid                          | $grid
+	                   |                         | h                             | $par.est
+	                   |                         |                               | $f.est
 ---------------------------+-------------------------+-------------------------------+--------------------------
 multivariate_estimation.R  | multiLocal              | data                          | $loc.cor
                            |                         | bandwidths                    | $f.est
