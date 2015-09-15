@@ -2,22 +2,26 @@
 % Please edit documentation in R/bivariate_estimation.R
 \name{biLocal.knn}
 \alias{biLocal.knn}
-\title{Estimate the local correlation between two variables when the marginals are standard normal. Uses local bandwidths, one bandwidth per grid point.}
+\title{Estimate the local correlation between two variables when the marginals are standard normal.
+Uses local bandwidths, one bandwidth per grid point.}
 \usage{
 biLocal.knn(data, grid, h)
 }
 \arguments{
-\item{data}{The data matrix, one row per observation. The marginals are assumed to be standard normal. They can be transformed using the transLocal-function.}
+\item{data}{The data matrix, one row per observation. The marginals are assumed to be standard normal.
+They can be transformed using the transLocal-function.}
 
 \item{grid}{The grid where the local correlation will be estimated.}
 
 \item{h}{The vector of bandwidths. Length must be equal to the number of grid points.}
 }
 \value{
-A list with 4 elements: $data is the data, $grid is the grid, $par.est is a vector of the estimated local correlations, and $f.est are the local likelihood density estimates there.
+A list with 4 elements: $data is the data, $grid is the grid, $par.est is a vector of the
+estimated local correlations, and $f.est are the local likelihood density estimates there.
 }
 \description{
-Estimate the local correlation between two variables when the marginals are standard normal. Uses local bandwidths, one bandwidth per grid point.
+Estimate the local correlation between two variables when the marginals are standard normal.
+Uses local bandwidths, one bandwidth per grid point.
 }
 \examples{
 data <- cbind(rt(100, df = 10), rt(100, df = 10))

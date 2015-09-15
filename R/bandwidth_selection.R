@@ -4,6 +4,7 @@
 ##| MULTIVARIATE LOCAL LIKELIHOOD ESTIMATION |##
 ##|                                          |##
 ##|     GLOBAL CROSS-VALIDATED BANDWIDTHS    |##
+##|            LOCAL kNN-BANDWIDTHS          |##
 ##|                                          |##
 ################################################
 
@@ -42,4 +43,70 @@ HLocal <- function(data) {
       }
       return(joint.bandwidths)
 }
+
+#' Calculate the distance to the k'th nearest neighbour for a given bivariate data set, on a given grid.
+#' @param data The data set, a nx2-matrix.
+#' @param grid The grid, a dx2-matrix.
+#' @param k The number of neighbours.
+#' @return A vector of length d containing the distance to the k'th nearest neighbour for each grid point.
+#' @examples
+#' data <- cbind(rnorm(100), rnorm(100))
+#' grid <- cbind(c(-1, 0, 1), c(-1, 0, 1))
+#' k <- 10
+#' knnBi(data, grid, k)
+
+knnBi <- function(data, grid, k) {
+    # Calculate the Eucledian distance between all pairs of data, and observations.
+    euclid <- fields::rdist(grid, data)
+    knn <- function(grid.point.index) {
+        euclid[grid.point.index, sort.int(euclid[grid.point.index,], index.return = TRUE)$ix[k]]
+    }
+    # Return the knn-value for each grid points 
+    apply(matrix(1:dim(grid)[1], ncol = 1), 1, knn)
+}
+
+#' Uses cross validation to determine the k for kNN bandwidth selection.
+#' @param data The data matrix.
+#' @param test Vector of integers that shall be tested. Chooses the k that has the highest likelihood.
+#' @return Matrix with 4 columns, one for each pair of variables. The first two columns indicate the
+#' pair in question, the third column givs the selected k, and the last column returns a 1 if the selected
+#' k is an endpoint for the "test"-vector. Perhaps one should change the search area?
+#' @examples
+#' data <- cbind(rnorm(100), rnorm(100))
+#' kLocal(data, test = seq(20, 80, 3))
+
+kLocal <- function(data, test) {
+
+    n <- dim(data)[1]                    # Number of observations
+    d <- dim(data)[2]                    # Dimension of the problem
+
+    # Initialize the matrix
+    k <- cbind(t(combn(c(1:d), 2)), 0*t(combn(c(1:d), 2)))
+    colnames(k) <- c('x1', 'x2', 'k', 'endpoint')
+
+    # Calculate k for each pair of observations
+    for(i in 1:dim(k)[1]) {
+        biv.data <- cbind(data[, k[i,'x1']], data[, k[i,'x2']])
+        # CV function to optimize
+        CV.bivariate <- function(k) {
+            k = k + 1 # Correct for evaluating in the grid points
+            h <- knnBi(biv.data, biv.data, k)
+            obj <- function(j) {
+                log(biLocal.knn(data = biv.data[-j,],
+                                grid = t(as.matrix(biv.data[j,])),
+                                h = h[j])$f.est)
+            }
+            -mean(do.call(rbind, lapply(X = as.list(1:n), FUN = obj)), na.rm = TRUE)
+        }
+        CV <- apply(matrix(test, ncol = 1), 1, CV.bivariate)
+        ind <- which.min(CV)
+        k[i, 3] <- test[ind]
+        if((ind == 1) | (ind == length(test)))
+            k[i, 4] = 1
+      }
+      return(k)
+}
+
+
+
 

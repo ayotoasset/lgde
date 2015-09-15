@@ -9,10 +9,12 @@
 ##############################################################
 
 #' Estimate the local correlation between two variables when the marginals are standard normal.
-#' @param data The data matrix, one row per observation. The marginals are assumed to be standard normal. They can be transformed using the transLocal-function.
+#' @param data The data matrix, one row per observation. The marginals are assumed to be standard normal.
+#' They can be transformed using the transLocal-function.
 #' @param grid The grid where the local correlation will be estimated.
 #' @param h The vector of bandwidths. Length must be 2.
-#' @return A list with 4 elements: $data is the data, $grid is the grid, $par.est is a vector of the estimated local correlations, and $f.est are the local likelihood density estimates there.
+#' @return A list with 4 elements: $data is the data, $grid is the grid, $par.est is a vector of the
+#' estimated local correlations, and $f.est are the local likelihood density estimates there.
 #' @examples
 #' data <- cbind(rt(100, df = 10), rt(100, df = 10))
 #' grid <- matrix(c(-1, -1, 0, 0, 1, 1), ncol = 2, byrow = TRUE)
@@ -66,7 +68,9 @@ biLocal = function(data,
                             tol = .Machine$double.eps^0.25/10^4),
                    silent=TRUE) 
         if(class(opt)!="try-error") {
-            return(c(opt$maximum, mvtnorm::dmvnorm(c(x0, y0), mean = c(0,0), sigma = matrix(c(1, opt$maximum, opt$maximum, 1), 2))))
+            return(c(opt$maximum,
+                     mvtnorm::dmvnorm(c(x0, y0), mean = c(0,0),
+                                      sigma = matrix(c(1, opt$maximum, opt$maximum, 1), 2))))
         } else {
             return(c(NA, NA))
         }
@@ -84,11 +88,14 @@ biLocal = function(data,
                 f.est = est[,2]))
 }    
                             
-#' Estimate the local correlation between two variables when the marginals are standard normal. Uses local bandwidths, one bandwidth per grid point.
-#' @param data The data matrix, one row per observation. The marginals are assumed to be standard normal. They can be transformed using the transLocal-function.
+#' Estimate the local correlation between two variables when the marginals are standard normal.
+#' Uses local bandwidths, one bandwidth per grid point.
+#' @param data The data matrix, one row per observation. The marginals are assumed to be standard normal.
+#' They can be transformed using the transLocal-function.
 #' @param grid The grid where the local correlation will be estimated.
 #' @param h The vector of bandwidths. Length must be equal to the number of grid points.
-#' @return A list with 4 elements: $data is the data, $grid is the grid, $par.est is a vector of the estimated local correlations, and $f.est are the local likelihood density estimates there.
+#' @return A list with 4 elements: $data is the data, $grid is the grid, $par.est is a vector of the
+#' estimated local correlations, and $f.est are the local likelihood density estimates there.
 #' @examples
 #' data <- cbind(rt(100, df = 10), rt(100, df = 10))
 #' grid <- matrix(c(-1, -1, 0, 0, 1, 1), ncol = 2, byrow = TRUE)
@@ -142,7 +149,9 @@ biLocal.knn = function(data,
                             tol = .Machine$double.eps^0.25/10^4),
                    silent=TRUE) 
         if(class(opt)!="try-error") {
-            return(c(opt$maximum, dmvnorm(c(x0, y0), mean = c(0,0), sigma = matrix(c(1, opt$maximum, opt$maximum, 1), 2))))
+            return(c(opt$maximum,
+                     dmvnorm(c(x0, y0), mean = c(0,0),
+                             sigma = matrix(c(1, opt$maximum, opt$maximum, 1), 2))))
         } else {
             return(c(NA, NA))
         }

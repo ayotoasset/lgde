@@ -3,6 +3,13 @@ FILE STRUCTURE FOR lgde-PACKAGE:
 FILE                       | CONTAINS FUNCTIONS      | INPUT                         | OUTPUT
 ---------------------------+-------------------------+-------------------------------+--------------------------
 bandwidth_selection.R      | HLocal                  | data                          | joint.bandwidths
+                           |.........................|...............................|..........................
+			   | knnBi                   | data                          | vector of knn
+			   |                         | grid                          |
+			   |                         | k                             |
+			   |.........................|...............................|..........................
+			   | kLocal                  | data                          | matrix of k
+			   |                         | test                          |
 ---------------------------+-------------------------+-------------------------------+--------------------------
 bivariate_estimation.R     | biLocal                 | data                          | $data
                            |                         | grid                          | $grid
