@@ -33,7 +33,13 @@ multivariate_estimation.R  | multiLocal              | data                     
 			   |                         | gsize                         | $k.mat
 			   |                         | grid                          | $dimension
 			   |                         | test                          | $pairs
-			   |                         |                               | $grid		   
+			   |                         |                               | $grid
+			   |.........................|...............................|..........................
+			   | condLocal               | data                          | f.est.con
+			   |                         | cond                          | 
+			   |                         | bandwidths                    |
+			   |                         | gsize                         | 
+			   |                         | grid                          | 
 ---------------------------+-------------------------+-------------------------------+--------------------------
 transLocal.R               | transLocal              | data                          | $transformed.data
                            |                         | grid                          | $transformed.grid

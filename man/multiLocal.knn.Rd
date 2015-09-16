@@ -27,13 +27,14 @@ A list with 6 elements:
     $loc.cor are the local correlations,
     $k.mat is the matrix of k's that was used,
     $pairs is a two-column matrix indicating all pairs of variables,
-    $grid is the grid at which the density has been estimated.
+    $grid is the grid at which the density has been estimated,
+    $test is a vector of k's to test for cross-validation.
 }
 \description{
 Estimate a multivariate density function using the LGDE and kNN bandwidths.
 }
 \examples{
 data <- cbind(rt(100, df = 10), rt(100, df = 10))
-multiLocal(data)
+multiLocal.knn(data)
 }
 
