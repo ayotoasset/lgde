@@ -33,6 +33,6 @@ Estimate a multivariate density function using the LGDE.
 }
 \examples{
 data <- cbind(rt(100, df = 10), rt(100, df = 10))
-multiLocal.knn(data)
+multiLocal(data)
 }
 
