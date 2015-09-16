@@ -206,7 +206,7 @@ multiLocal.knn <- function(data,
                 dimension = d,
                 pairs = pairs,
                 grid = grid,
-                k.mat = k.mat)
+                k.mat = h)
     return(ret)
         
 }
