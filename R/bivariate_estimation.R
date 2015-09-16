@@ -150,7 +150,7 @@ biLocal.knn = function(data,
                    silent=TRUE) 
         if(class(opt)!="try-error") {
             return(c(opt$maximum,
-                     dmvnorm(c(x0, y0), mean = c(0,0),
+                     mvtnorm::dmvnorm(c(x0, y0), mean = c(0,0),
                              sigma = matrix(c(1, opt$maximum, opt$maximum, 1), 2))))
         } else {
             return(c(NA, NA))

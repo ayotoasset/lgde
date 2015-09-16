@@ -24,7 +24,7 @@
 #'     $grid is the grid at which the density has been estimated.
 #' @examples
 #' data <- cbind(rt(100, df = 10), rt(100, df = 10))
-#' multiLocal.knn(data)
+#' multiLocal(data)
 
 multiLocal <- function(data,
                        bandwidths = NULL,
