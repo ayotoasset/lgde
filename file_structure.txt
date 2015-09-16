@@ -27,6 +27,13 @@ multivariate_estimation.R  | multiLocal              | data                     
 			   |                         | grid                          | $dimension
 			   |                         |                               | $pairs
 			   |                         |                               | $grid
+			   |.........................|...............................|.........................
+                           | multiLocal.knn          | data                          | $loc.cor
+                           |                         | k.mat                         | $f.est
+			   |                         | gsize                         | $k.mat
+			   |                         | grid                          | $dimension
+			   |                         | test                          | $pairs
+			   |                         |                               | $grid		   
 ---------------------------+-------------------------+-------------------------------+--------------------------
 transLocal.R               | transLocal              | data                          | $transformed.data
                            |                         | grid                          | $transformed.grid
