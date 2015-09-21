@@ -57,6 +57,8 @@ HLocal <- function(data) {
 
 knnBi <- function(data, grid, k) {
     # Calculate the Eucledian distance between all pairs of data, and observations.
+    # Deal with infinite grid values by putting them far out, and therefore at the bottom of the list everywhere.
+    grid[grid == Inf] <- 100
     euclid <- fields::rdist(grid, data)
     knn <- function(grid.point.index) {
         euclid[grid.point.index, sort.int(euclid[grid.point.index,], index.return = TRUE)$ix[k]]
