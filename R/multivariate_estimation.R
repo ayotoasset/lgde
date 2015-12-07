@@ -264,7 +264,7 @@ condLocal <- function(data,
     }
             
     pairs <- h[,1:2]
-    if(length(pairs) == 2) {pairs <- as.matrix(pairs)} 
+    if(length(pairs) == 2) {pairs <- t(as.matrix(pairs))} 
     if(length(pairs) == 2) {n.pairs <- 1} else {n.pairs <- dim(pairs)[1]}
 
     # Function to calculate local correlation
