@@ -288,6 +288,7 @@ condLocal <- function(data,
         parameter.matrix <- cbind(z.grid[,1:(d-length(cond))], do.call(cbind, joints))
     }
 
+    # The first elements are the z-grid point, the rest are the local correlations there 
     parameter.matrix <- split(parameter.matrix, row(parameter.matrix))
             
     
@@ -310,16 +311,26 @@ condLocal <- function(data,
          dim(S12) <- c(d - length(cond), length(cond))
          S21 <- as.matrix(sigma[(d-length(cond) + 1):d, 1:(d - length(cond))])
          dim(S21) <- rev(dim(S12))
-         mvtnorm::dmvnorm(as.numeric(x),
-                          mean = S12%*%solve(S22)%*%as.matrix(z.grid[1,(d-length(cond)+1):d]),
-                          sigma = S11 - S12%*%solve(S22)%*%S21)
+         c.mean = S12%*%solve(S22)%*%as.matrix(z.grid[1,(d-length(cond)+1):d])
+         c.sig = S11 - S12%*%solve(S22)%*%S21
+         list( c.mean, c.sig, 
+             mvtnorm::dmvnorm(as.numeric(x),
+                              mean = c.mean,
+                              sigma = c.sig)
+             )
      }
 
     f.est.cond <- do.call(rbind,
-                     lapply(X = parameter.matrix, FUN = f.estimate))*
+                     lapply(lapply(X = parameter.matrix, FUN = f.estimate), "[[", 3))*
                          apply(as.matrix(normalizing.constants[,1:(d-length(cond))]), 1, prod)
 
-    ret <- list(f.est.cond = f.est.cond)
+    ret <- list(loc.cor = joints,
+                pairs = pairs,
+                x.grid = x.grid,
+                z.grid = z.grid,
+                c.mean = lapply(lapply(X = parameter.matrix, FUN = f.estimate), "[[", 1),
+                c.sig = lapply(lapply(X = parameter.matrix, FUN = f.estimate), "[[", 2),
+                f.est.cond = f.est.cond)
     return(ret)
 }    
     
