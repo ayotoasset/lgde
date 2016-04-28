@@ -4,6 +4,7 @@
 ##| MULTIVARIATE LOCAL LIKELIHOOD ESTIMATION |##
 ##|                                          |##
 ##|     GLOBAL CROSS-VALIDATED BANDWIDTHS    |##
+##|              PLUGIN BANDWIDTHS           |##
 ##|            LOCAL kNN-BANDWIDTHS          |##
 ##|                                          |##
 ################################################
@@ -42,6 +43,22 @@ HLocal <- function(data) {
                                          CV.bivariate)$par
       }
       return(joint.bandwidths)
+}
+
+#' Create a bandwidth object using the plugin method h = 1.75n^{-1/6}
+#' @param n The number of observations.
+#' @param nvar The number of variables
+#' @return A matrix with bandwidths to be used in the multiLocal- or condLocal-functions.
+#' @examples
+#' data <- cbind(rnorm(100), rnorm(100))
+#' pluginLocal(data)
+
+pluginLocal <- function(n, nvar) {
+    joint.bandwidths <- cbind(t(combn(c(1:nvar), 2)), 0 * t(combn(c(1:nvar), 
+        2)))
+    colnames(joint.bandwidths) <- c("x1", "x2", "h1", "h2")
+    joint.bandwidths[,c("h1", "h2")] <- 1.75*n^(-1/6)
+    joint.bandwidths
 }
 
 #' Calculate the distance to the k'th nearest neighbour for a given bivariate data set, on a given grid.
