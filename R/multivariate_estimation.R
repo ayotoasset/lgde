@@ -333,5 +333,6 @@ condLocal <- function(data,
                 f.est.cond = f.est.cond)
     return(ret)
 }    
-    
+
+# TEST
 
