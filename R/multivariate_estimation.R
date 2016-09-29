@@ -99,7 +99,7 @@ multiLocal <- function(data,
     f.est <- do.call(rbind, lapply(X = parameter.matrix, FUN = f.estimate))*apply(normalizing.constants, 1, prod)
             
     # Return results
-    ret <- list(loc.cor = joints, f.est = f.est, h = h, dimension = d, pairs = pairs, grid = grid)
+    ret <- list(loc.cor = joints, f.est = f.est, h = h, dimension = d, pairs = pairs, grid = grid, data = data)
     return(ret)
         
 }
@@ -334,5 +334,4 @@ condLocal <- function(data,
     return(ret)
 }    
 
-# TEST
 
